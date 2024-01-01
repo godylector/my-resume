@@ -3,6 +3,24 @@ import { motion, useScroll, useTransform } from "framer-motion";
 
 // Images
 import Avatar1 from "../../assets/images/avatar1.png";
+import CloudImage from "../../assets/images/cloud.png";
+
+const Cloud: FC = () => {
+  const { scrollYProgress } = useScroll();
+  const translateX = useTransform(scrollYProgress, [0, 1], [0, 2000]);
+  const opacity = useTransform(scrollYProgress, [0, 1], [1, 0]);
+  return (
+    <motion.div
+      initial={{ opacity: 0, translateX: -2000 }}
+      animate={{ opacity: 1, translateX: 0 }}
+      transition={{ duration: 0.5 }}
+      style={{ translateX, opacity }}
+      className="absolute top-[2vw] left-[2vw] w-[96vw] h-[80dvh]"
+    >
+      <img src={CloudImage} className="w-full h-full" alt="cloud" />
+    </motion.div>
+  );
+};
 
 const Wave: FC = () => {
   const { scrollYProgress } = useScroll();
@@ -10,7 +28,7 @@ const Wave: FC = () => {
   const opacity = useTransform(scrollYProgress, [0, 1], [1, 0]);
   return (
     <motion.div
-      initial={{ opacity: 0, translateY: -50 }}
+      initial={{ opacity: 0, translateY: 100 }}
       animate={{ opacity: 1, translateY: 0 }}
       transition={{ duration: 0.5 }}
       style={{ translateY, opacity }}
@@ -89,15 +107,112 @@ const CodeBox: FC = () => {
   const { scrollYProgress } = useScroll();
   const scale = useTransform(scrollYProgress, [0, 1], [1, 0]);
   const opacity = useTransform(scrollYProgress, [0, 1], [1, 0]);
+
+  const textLists = [
+    {
+      tag: "h1",
+      text: 'My name is "Sakkarin Simma"',
+      status: true,
+    },
+    {
+      tag: "h2",
+      text: 'You can call me "Fluk"',
+      status: true,
+    },
+    {
+      tag: "",
+      text: "",
+      status: false,
+    },
+    {
+      tag: "h1",
+      text: "Socials",
+      status: true,
+    },
+    {
+      tag: "a",
+      href: "Facebook",
+      text: "Sakkarin Simma",
+      link: "https://www.facebook.com/sakkarin.simma.1/",
+      status: true,
+    },
+    {
+      tag: "a",
+      href: "Github",
+      text: "godylector",
+      link: "https://github.com/godylector",
+      status: true,
+    },
+  ];
+
   return (
     <motion.div
       initial={{ opacity: 0, scale: 0 }}
       animate={{ opacity: 1, scale: 1 }}
       transition={{ duration: 0.5, delay: 0.5 }}
       style={{ scale, opacity }}
-      className="absolute z-[0] bottom-5 left-[22vw] w-[50vw] h-[95vh] backdrop-blur-md bg-[#1E1E1E]/80 rounded-[20px] p-4 shadow-lg shadow-black/20"
+      className="absolute z-[0] bottom-5 2xl:left-[22vw] xl:left-[22vw] left-6 2xl:w-[50vw] xl:w-[55vw] lg:w-[70vw] md:w-[70vw] w-[90%] h-[95vh] backdrop-blur-lg bg-[#1E1E1E]/80 rounded-[20px] p-4 shadow-lg shadow-black/20"
     >
-      test
+      <div className="flex justify-start items-center gap-3">
+        <div className="w-[15px] h-[15px] bg-[#F43838] rounded-full"></div>
+        <div className="w-[15px] h-[15px] bg-[#F49D38] rounded-full"></div>
+        <div className="w-[15px] h-[15px] bg-[#38F43F] rounded-full"></div>
+      </div>
+      <div className="mt-5">
+        {textLists.map((item, idx) => (
+          <div key={idx} className="flex justify-start items-center gap-6">
+            <p className="text-[#858585] text-[25px] font-[400]">{idx + 1}</p>
+            {item.status && (
+              <>
+                {(item.tag === "a" && (
+                  <a
+                    href={item.link}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="text-white 2xl:text-[25px] xl:text-[25px] lg:text-[25px] md:text-[25px] text-[17px]"
+                  >
+                    <span className="text-[#808080]">{"<"}</span>
+                    <span className="text-[#569CD6]">
+                      {item.tag}{" "}
+                      {item.tag === "a" ? (
+                        <span>
+                          href=<span className="text-white">"{item.href}"</span>
+                        </span>
+                      ) : (
+                        ""
+                      )}
+                    </span>
+                    <span className="text-[#808080]">{">"}</span>
+                    <span>{item.text}</span>
+                    <span className="text-[#808080]">{"</"}</span>
+                    <span className="text-[#569CD6]">{item.tag}</span>
+                    <span className="text-[#808080]">{">"}</span>
+                  </a>
+                )) || (
+                  <h1 className="text-white 2xl:text-[25px] xl:text-[25px] lg:text-[25px] md:text-[25px] text-[17px]">
+                    <span className="text-[#808080]">{"<"}</span>
+                    <span className="text-[#569CD6]">
+                      {item.tag}
+                      {item.tag === "a" ? (
+                        <span>
+                          href=<span className="text-white">"{item.href}"</span>
+                        </span>
+                      ) : (
+                        ""
+                      )}
+                    </span>
+                    <span className="text-[#808080]">{">"}</span>
+                    <span>{item.text}</span>
+                    <span className="text-[#808080]">{"</"}</span>
+                    <span className="text-[#569CD6]">{item.tag}</span>
+                    <span className="text-[#808080]">{">"}</span>
+                  </h1>
+                )}
+              </>
+            )}
+          </div>
+        ))}
+      </div>
     </motion.div>
   );
 };
@@ -112,7 +227,7 @@ const Avatar: FC = () => {
       animate={{ opacity: 1, translateX: 0 }}
       transition={{ duration: 0.5 }}
       style={{ translateX: avatarTranslateX, opacity }}
-      className="absolute z-[2] bottom-[-2vw] right-[17vw] w-[20vw] h-[100dvh]"
+      className="2xl:block xl:block lg:block md:block hidden absolute z-[2] bottom-0 2xl:right-[17vw] xl:right-[9vw] lg:right-[11vw] md:right-[8vw] 2xl:w-[20vw] xl:w-[24vw] lg:w-[29vw] md:w-[32vw] w-[50vw] h-[100dvh]"
     >
       <img
         src={Avatar1}
@@ -128,6 +243,7 @@ const MainSection1: FC = () => {
   return (
     <section className="w-full h-screen">
       <div className="relative w-full h-full">
+        <Cloud />
         <CodeBox />
         <Avatar />
         <Wave />
