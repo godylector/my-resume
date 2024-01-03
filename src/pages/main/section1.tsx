@@ -1,5 +1,6 @@
 import { FC } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
+import "./index.css"
 
 // Images
 import Avatar1 from "../../assets/images/avatar1.png";
@@ -151,7 +152,7 @@ const CodeBox: FC = () => {
       animate={{ opacity: 1, scale: 1 }}
       transition={{ duration: 0.5, delay: 0.5 }}
       style={{ scale, opacity }}
-      className="absolute z-[0] bottom-5 2xl:left-[22vw] xl:left-[22vw] left-6 2xl:w-[50vw] xl:w-[55vw] lg:w-[70vw] md:w-[70vw] w-[90%] h-[95vh] backdrop-blur-lg bg-[#1E1E1E]/80 rounded-[20px] p-4 shadow-lg shadow-black/20"
+      className="absolute z-[0] bottom-5 2xl:left-[22vw] xl:left-[22vw] left-6 2xl:w-[50vw] xl:w-[55vw] lg:w-[70vw] md:w-[70vw] w-[90%] h-[95vh] backdrop-blur-lg bg-[#1E1E1E]/80 rounded-[20px] p-4 shadow-xl shadow-[#00D1FF]"
     >
       <div className="flex justify-start items-center gap-3">
         <div className="w-[15px] h-[15px] bg-[#F43838] rounded-full"></div>
